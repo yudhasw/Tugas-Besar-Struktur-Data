@@ -193,3 +193,39 @@ void show_dataTurnamen(ListTurnamen T){
         }
     }
 };
+
+//Mencari dan menampilkan data Atlet yang mengikuti Turnamen tertentu
+void show_dataAtlet_withSpesificTournament(ListPesertaTurnamen PT, string nama_tournamen){
+/*I.S terdefinisi PT berisi data relasi atlet dan turnamen, dan nama_turnamen yang ingin dicari*/
+/*F.S mencari dan menampilkan data atlet dengan nama turnamen tertentu*/
+    adr_PT pointer = first(PT);
+
+    if (count_dataAtlet_withSpesificTournament(PT, nama_tournamen) > 0){
+        printf("%16f %15s %10s %15s %15s\n", "ID Turnamen", "Nama", "Tingakt", "Cabor", "Deskripsi");
+        while (pointer != NULL){
+            if (info(adrTurnamen(pointer)).nama_turnamen == nama_tournamen){
+                 printf("%16f %15s %10s %15s %15s\n", info(adrTurnamen(pointer)).ID_turnamen, info(adrTurnamen(pointer)).nama_turnamen, info(adrTurnamen(pointer)).tingkat, info(adrTurnamen(pointer)).cabang_olahraga, info(adrTurnamen(pointer)).deskripsi);
+            }
+            pointer = next(pointer);
+        }
+    } else {
+        cout << "Tidak ditemukan atlet yang mengikuti turnamen " << nama_tournamen << endl;
+    }
+}
+
+//Menghitung jumlah PesertaTurnamen yang mengikuti Turnamen tertentu
+int count_dataAtlet_withSpesificTournament(ListPesertaTurnamen PT, string nama_tournamen){
+/*I.S terdefinisi PT berisi data relasi atlet dan turnamen, dan nama_turnamen yang ingin dicari*/
+/*F.S menghitung banyak data atlet yang mengikuti suatu turnamen*/
+    adr_PT pointer = first(PT);
+    int i = 0; //mengetahui apakah ada atlet yang mengiikuti suatu turnamen
+
+    while (pointer != NULL){
+        if (info(adrTurnamen(pointer)).nama_turnamen == nama_tournamen){
+            i++;
+        }
+        pointer = next(pointer);
+    }
+    return i;
+}
+
